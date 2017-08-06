@@ -7,15 +7,22 @@ import './App.css';
 
 class BooksApp extends Component {
     state = {
-        search: []
+        search: [],
+        books: []
     }
 
     componentDidMount () {
-
+        BooksAPI.getAll().then(books => {
+            // console.log(books);
+            this.setState({
+                books
+            });
+        });
     }
 
     search = (query) => {
         BooksAPI.search(query).then(books => {
+            // console.log(books);
             this.setState({
                 search: books
             });
@@ -26,10 +33,15 @@ class BooksApp extends Component {
         return (
             <div className="app">
                 <Route exact path="/" render={() => (
-                    <BookList />
+                    <BookList
+                        books={this.state.books}
+                    />
                 )} />
                 <Route exact path="/search" render={() => (
-                    <SearchPage onSearch={this.search} books={this.state.search} />
+                    <SearchPage
+                        onSearch={this.search}
+                        books={this.state.search}
+                    />
                 )} />
             </div>
         )

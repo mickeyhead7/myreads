@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import Bookshelf from './Bookshelf';
 
 class BookList extends Component {
+    currentlyReading = () => {
+        return this.props.books.filter(book => book.shelf === 'currentlyReading');
+    }
+
+    wantToRead = () => {
+        return this.props.books.filter(book => book.shelf === 'wantToRead');
+    }
+
+    read = () => {
+        return this.props.books.filter(book => book.shelf === 'read');
+    }
+
     render () {
         return (
             <div className="list-books">
@@ -10,13 +22,13 @@ class BookList extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <Bookshelf title="Currently Reading" />
-                        <Bookshelf title="Want to Read" />
-                        <Bookshelf title="Read" />
+                        <Bookshelf title="Currently Reading" books={this.currentlyReading()} />
+                        <Bookshelf title="Want to Read" books={this.wantToRead()} />
+                        <Bookshelf title="Read" books={this.read()} />
                     </div>
                 </div>
                 <div className="open-search">
-                    <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+                    <a href="/search">Add a book</a>
                 </div>
             </div>
         );
