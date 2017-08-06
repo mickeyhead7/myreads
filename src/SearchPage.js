@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import DebounceInput from 'react-debounce-input';
 import Book from './Book';
 
@@ -15,7 +16,7 @@ class SearchPage extends Component {
         return (
             <div className="search-books">
                 <div className="search-books-bar">
-                    <a href="/" className="close-search">Close</a>
+                    <Link to="/" className="close-search">Close</Link>
                     <div className="search-books-input-wrapper">
                         <DebounceInput
                             type="text"
