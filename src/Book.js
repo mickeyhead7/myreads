@@ -8,14 +8,16 @@ class Book extends Component {
     }
 
     render () {
-        const thumbnail = `url("${this.props.imageLinks.smallThumbnail}")`;
+        const thumbnailUrl = this.props.imageLinks.smallThumbnail || null;
+        const thumbnail = `url("${thumbnailUrl}")`;
+        const shelf = this.props.shelf || 'none';
 
         return (
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: thumbnail }}></div>
                     <div className="book-shelf-changer">
-                        <select value={this.props.shelf} onChange={event => this.props.onMove(this.props, event.target.options[event.target.selectedIndex].value)}>
+                        <select value={shelf} onChange={event => this.props.onMove(this.props, event.target.options[event.target.selectedIndex].value)}>
                             <option value="none" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>

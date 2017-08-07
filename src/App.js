@@ -20,7 +20,6 @@ class BooksApp extends Component {
 
     componentDidMount () {
         BooksAPI.getAll().then(books => {
-            // console.log(books);
             this.setState({
                 books: books,
                 shelves: this.shelves(books)
@@ -38,9 +37,8 @@ class BooksApp extends Component {
 
     search = (query) => {
         BooksAPI.search(query).then(books => {
-            // console.log(books);
             this.setState({
-                searchResults: books,
+                searchResults: books || [],
                 query: query
             });
         });
@@ -48,19 +46,17 @@ class BooksApp extends Component {
 
     move = (book, shelf) => {
         BooksAPI.update(book, shelf).then(shelves => {
-            this.setState(previous => {
-                previous.books.map(b => {
-                    if (b.id === book.id) {
-                        b.shelf = shelf;
-                    }
+            BooksAPI.get(book.id).then(b => {
+                this.setState(previous => {
+                    const books = previous.books.filter(b => b.id !== book.id);
 
-                    return b;
+                    books.push(b);
+
+                    return {
+                        books,
+                        shelves
+                    };
                 });
-
-                return {
-                    books: previous.books,
-                    shelves: shelves
-                };
             });
         });
     }
