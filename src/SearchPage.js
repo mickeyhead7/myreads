@@ -21,8 +21,9 @@ class SearchPage extends Component {
                         <DebounceInput
                             type="text"
                             placeholder="Search by title or author"
+                            value={this.props.query}
                             debounceTimeout={300}
-                            onChange={(event) => this.search(event.target.value)}
+                            onChange={event => this.search(event.target.value)}
                         />
                     </div>
                 </div>
@@ -30,7 +31,7 @@ class SearchPage extends Component {
                     <ol className="books-grid">
                         {this.props.books.map(book => (
                             <li key={book.id}>
-                                <Book {...book} />
+                                <Book {...book} onMove={this.props.onMove} />
                             </li>
                         ))}
                     </ol>

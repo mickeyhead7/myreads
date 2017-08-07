@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
+import * as BookUtils from './utils/books';
 
 class BookList extends Component {
-    currentlyReading = () => {
-        return this.props.books.filter(book => book.shelf === 'currentlyReading');
-    }
-
-    wantToRead = () => {
-        return this.props.books.filter(book => book.shelf === 'wantToRead');
-    }
-
-    read = () => {
-        return this.props.books.filter(book => book.shelf === 'read');
-    }
-
     render () {
+        const currentlyReading = BookUtils.getCurrentlyReading(this.props.books);
+        const wantToRead = BookUtils.getWantToRead(this.props.books);
+        const read = BookUtils.getRead(this.props.books);
+
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -23,9 +16,9 @@ class BookList extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <Bookshelf title="Currently Reading" books={this.currentlyReading()} />
-                        <Bookshelf title="Want to Read" books={this.wantToRead()} />
-                        <Bookshelf title="Read" books={this.read()} />
+                        <Bookshelf title="Currently Reading" books={currentlyReading} onMove={this.props.onMove} />
+                        <Bookshelf title="Want to Read" books={wantToRead} onMove={this.props.onMove} />
+                        <Bookshelf title="Read" books={read} onMove={this.props.onMove} />
                     </div>
                 </div>
                 <div className="open-search">

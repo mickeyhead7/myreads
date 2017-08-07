@@ -15,7 +15,7 @@ class Book extends Component {
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: thumbnail }}></div>
                     <div className="book-shelf-changer">
-                        <select>
+                        <select value={this.props.shelf} onChange={event => this.props.onMove(this.props, event.target.options[event.target.selectedIndex].value)}>
                             <option value="none" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
