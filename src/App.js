@@ -36,7 +36,7 @@ class BooksApp extends Component {
     }
 
     /**
-     * Generates an array of bookshelves by book.id
+     * Generates arrays of bookshelves by book.id
      *
      * @param books {array} All books
      * @returns {object} Formatted book shelves
