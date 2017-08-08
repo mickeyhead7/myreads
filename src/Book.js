@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
 import nestedProperty from 'nested-property';
 
+/**
+ * Renders a book
+ */
 class Book extends Component {
+    /**
+     * Formats the authors for output
+     *
+     * @param authors {array} Authors
+     * @returns {XML} Formatted output
+     */
     formatAuthor = (authors = []) => {
         return authors.map((author, key) => (
             <div key={key}>{author}</div>
         ));
     }
 
+    /**
+     * Renders the view
+     *
+     * @returns {XML} View output
+     */
     render () {
         const { title, authors, imageLinks, onMove, findShelf } = this.props;
         const thumbnailUrl = nestedProperty.get(imageLinks, 'smallThumbnail') || null;

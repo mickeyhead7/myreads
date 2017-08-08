@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 import DebounceInput from 'react-debounce-input';
 import Book from './Book';
 
+/**
+ * Search page view
+ */
 class SearchPage extends Component {
+    /**
+     * Performs a search
+     *
+     * @param query {string} Search query
+     */
     search = (query) => {
         if (!this.props.onSearch) {
             throw new Error('onSearch method not defined');
@@ -12,6 +20,11 @@ class SearchPage extends Component {
         this.props.onSearch(query);
     }
 
+    /**
+     * Renders the view
+     *
+     * @returns {XML} View output
+     */
     render () {
         const { query, onMove, findShelf } = this.props;
 

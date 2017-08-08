@@ -5,7 +5,13 @@ import BookList from './BookList';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 
+/**
+ * Renders the application using routing
+ */
 class BooksApp extends Component {
+    /**
+     * @type {object} Application state
+     */
     state = {
         books: [],
         shelves: {
@@ -17,6 +23,9 @@ class BooksApp extends Component {
         query: ''
     }
 
+    /**
+     * Retrieves books when the component has mounted
+     */
     componentDidMount () {
         BooksAPI.getAll().then(books => {
             this.setState({
@@ -26,6 +35,12 @@ class BooksApp extends Component {
         });
     }
 
+    /**
+     * Generates an array of bookshelves by book.id
+     *
+     * @param books {array} All books
+     * @returns {object} Formatted book shelves
+     */
     shelves = (books) => {
         const currentlyReading = books.filter(book => book.shelf === 'currentlyReading')
             .map(book => book.id);
@@ -43,6 +58,11 @@ class BooksApp extends Component {
         }
     }
 
+    /**
+     * Performs a book search
+     *
+     * @param query {string} Search query
+     */
     search = (query) => {
         BooksAPI.search(query).then(books => {
             this.setState({
@@ -52,6 +72,12 @@ class BooksApp extends Component {
         });
     }
 
+    /**
+     * Moves a book to a specified shelf
+     *
+     * @param book {object} Book to move
+     * @param shelf {string} Shelf to move book to
+     */
     move = (book, shelf) => {
         BooksAPI.update(book, shelf).then(shelves => {
             this.setState(previous => {
@@ -67,6 +93,12 @@ class BooksApp extends Component {
         });
     }
 
+    /**
+     * Finds the shelf of a given book
+     *
+     * @param book {object} Book to query
+     * @returns {string} Book shelf
+     */
     findShelf = (book) => {
         const { shelves } = this.state;
 
@@ -81,6 +113,11 @@ class BooksApp extends Component {
         return 'none';
     }
 
+    /**
+     * Renders the application
+     *
+     * @returns {XML} Application output
+     */
     render () {
         const { shelves, books, query } = this.state;
         const currentlyReading = books.filter(book => shelves.currentlyReading.includes(book.id));

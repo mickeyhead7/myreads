@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import Book from './Book';
 
+/**
+ * Renders a bookshelf
+ */
 class Bookshelf extends Component {
+    /**
+     * Renders the view
+     *
+     * @returns {XML} View output
+     */
     render () {
         const { title, books, onMove, findShelf } = this.props;
 

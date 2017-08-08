@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
 
+/**
+ * Renders a book list view
+ */
 class BookList extends Component {
+    /**
+     * Renders the view
+     *
+     * @returns {XML} View output
+     */
     render () {
         const { currentlyReading, wantToRead, read, onMove, findShelf } = this.props;
 
