@@ -13,6 +13,8 @@ class SearchPage extends Component {
     }
 
     render () {
+        const { query, onMove, findShelf } = this.props;
+
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -21,7 +23,7 @@ class SearchPage extends Component {
                         <DebounceInput
                             type="text"
                             placeholder="Search by title or author"
-                            value={this.props.query}
+                            value={query}
                             debounceTimeout={300}
                             onChange={event => this.search(event.target.value)}
                         />
@@ -31,7 +33,11 @@ class SearchPage extends Component {
                     <ol className="books-grid">
                         {this.props.books.map(book => (
                             <li key={book.id}>
-                                <Book {...book} onMove={this.props.onMove} />
+                                <Book
+                                    {...book}
+                                    onMove={onMove}
+                                    findShelf={findShelf}
+                                />
                             </li>
                         ))}
                     </ol>

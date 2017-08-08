@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import SearchPage from './SearchPage';
 import BookList from './BookList';
-import * as BookUtils from './utils/books';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 
@@ -28,10 +27,19 @@ class BooksApp extends Component {
     }
 
     shelves = (books) => {
+        const currentlyReading = books.filter(book => book.shelf === 'currentlyReading')
+            .map(book => book.id);
+
+        const wantToRead = books.filter(book => book.shelf === 'wantToRead')
+            .map(book => book.id);
+
+        const read = books.filter(book => book.shelf === 'read')
+            .map(book => book.id);
+
         return {
-            currentlyReading: BookUtils.getCurrentlyReading(books).map(book => book.id),
-            wantToRead: BookUtils.getWantToRead(books).map(book => book.id),
-            read: BookUtils.getRead(books).map(book => book.id)
+            currentlyReading,
+            wantToRead,
+            read
         }
     }
 
@@ -46,37 +54,57 @@ class BooksApp extends Component {
 
     move = (book, shelf) => {
         BooksAPI.update(book, shelf).then(shelves => {
-            BooksAPI.get(book.id).then(b => {
-                this.setState(previous => {
-                    const books = previous.books.filter(b => b.id !== book.id);
+            this.setState(previous => {
+                const books = previous.books.filter(b => b.id !== book.id);
 
-                    books.push(b);
+                books.push(book);
 
-                    return {
-                        books,
-                        shelves
-                    };
-                });
+                return {
+                    books,
+                    shelves
+                };
             });
         });
     }
 
+    findShelf = (book) => {
+        const { shelves } = this.state;
+
+        if (shelves.currentlyReading.includes(book.id)) {
+            return 'currentlyReading';
+        } else if (shelves.wantToRead.includes(book.id)) {
+            return 'wantToRead';
+        } else if (shelves.read.includes(book.id)) {
+            return 'read';
+        }
+
+        return 'none';
+    }
+
     render () {
+        const { shelves, books, query } = this.state;
+        const currentlyReading = books.filter(book => shelves.currentlyReading.includes(book.id));
+        const wantToRead = books.filter(book => shelves.wantToRead.includes(book.id));
+        const read = books.filter(book => shelves.read.includes(book.id));
+
         return (
             <div className="app">
                 <Route exact path="/" render={() => (
                     <BookList
-                        books={this.state.books}
-                        shelves={this.state.shelves}
+                        currentlyReading={currentlyReading}
+                        wantToRead={wantToRead}
+                        read={read}
                         onMove={this.move}
+                        findShelf={this.findShelf}
                     />
                 )} />
                 <Route exact path="/search" render={() => (
                     <SearchPage
-                        books={this.state.searchResults}
-                        query={this.state.query}
+                        books={books}
+                        query={query}
                         onSearch={this.search}
                         onMove={this.move}
+                        findShelf={this.findShelf}
                     />
                 )} />
             </div>
