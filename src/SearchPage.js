@@ -11,13 +11,14 @@ class SearchPage extends Component {
      * Performs a search
      *
      * @param query {string} Search query
+     * @returns {*} Result of search method
      */
     search = (query) => {
         if (!this.props.onSearch) {
             throw new Error('onSearch method not defined');
         }
 
-        this.props.onSearch(query);
+        return this.props.onSearch(query);
     }
 
     /**
@@ -26,7 +27,7 @@ class SearchPage extends Component {
      * @returns {XML} View output
      */
     render () {
-        const { query, onMove, findShelf } = this.props;
+        const { query, books, onMove } = this.props;
 
         return (
             <div className="search-books">
@@ -44,12 +45,12 @@ class SearchPage extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.props.books.map(book => (
+                        {books.map(book => (
                             <li key={book.id}>
                                 <Book
                                     {...book}
+                                    original={book}
                                     onMove={onMove}
-                                    findShelf={findShelf}
                                 />
                             </li>
                         ))}

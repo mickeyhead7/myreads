@@ -11,7 +11,7 @@ class Bookshelf extends Component {
      * @returns {XML} View output
      */
     render () {
-        const { title, books, onMove, findShelf } = this.props;
+        const { title, books, onMove } = this.props;
 
         return (
             <div className="bookshelf">
@@ -22,8 +22,8 @@ class Bookshelf extends Component {
                             <li key={key}>
                                 <Book
                                     {...book}
+                                    original={book}
                                     onMove={onMove}
-                                    findShelf={findShelf}
                                 />
                             </li>
                         ))}

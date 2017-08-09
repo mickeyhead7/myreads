@@ -12,7 +12,7 @@ class BookList extends Component {
      * @returns {XML} View output
      */
     render () {
-        const { currentlyReading, wantToRead, read, onMove, findShelf } = this.props;
+        const { currentlyReading, wantToRead, read, onMove } = this.props;
 
         return (
             <div className="list-books">
@@ -25,19 +25,16 @@ class BookList extends Component {
                             title="Currently Reading"
                             books={currentlyReading}
                             onMove={onMove}
-                            findShelf={findShelf}
                         />
                         <Bookshelf
                             title="Want to Read"
                             books={wantToRead}
                             onMove={onMove}
-                            findShelf={findShelf}
                         />
                         <Bookshelf
                             title="Read"
                             books={read}
                             onMove={onMove}
-                            findShelf={findShelf}
                         />
                     </div>
                 </div>

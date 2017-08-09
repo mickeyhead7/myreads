@@ -18,22 +18,33 @@ class Book extends Component {
     }
 
     /**
+     * Handle moving a book to a shelf
+     *
+     * @param event Trigger event
+     * @returns {*} Result of move method
+     */
+    handleMove = (event) => {
+        const shelf = event.target.options[event.target.selectedIndex].value;
+
+        return this.props.onMove(this.props.original, shelf);
+    }
+
+    /**
      * Renders the view
      *
      * @returns {XML} View output
      */
     render () {
-        const { title, authors, imageLinks, onMove, findShelf } = this.props;
+        const { title, authors, shelf, imageLinks } = this.props;
         const thumbnailUrl = nestedProperty.get(imageLinks, 'smallThumbnail') || null;
         const thumbnail = `url("${thumbnailUrl}")`;
-        const shelf = findShelf(this.props);
 
         return (
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: thumbnail }} />
                     <div className="book-shelf-changer">
-                        <select value={shelf} onChange={event => onMove(this.props, event.target.options[event.target.selectedIndex].value)}>
+                        <select value={shelf || 'none'} onChange={this.handleMove}>
                             <option value="none" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
