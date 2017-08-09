@@ -119,7 +119,7 @@ class BooksApp extends Component {
      * @returns {XML} Application output
      */
     render () {
-        const { shelves, books, query } = this.state;
+        const { shelves, books, query, searchResults } = this.state;
         const currentlyReading = books.filter(book => shelves.currentlyReading.includes(book.id));
         const wantToRead = books.filter(book => shelves.wantToRead.includes(book.id));
         const read = books.filter(book => shelves.read.includes(book.id));
@@ -137,7 +137,7 @@ class BooksApp extends Component {
                 )} />
                 <Route exact path="/search" render={() => (
                     <SearchPage
-                        books={books}
+                        books={searchResults}
                         query={query}
                         onSearch={this.search}
                         onMove={this.move}
