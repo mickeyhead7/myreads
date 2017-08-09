@@ -68,8 +68,8 @@ class BooksApp extends Component {
 
             book.shelf = shelf;
             books.push(book);
-            BooksAPI.update(book, shelf);
             books.sort(sortBy('title'));
+            BooksAPI.update(book, shelf);
 
             return {
                 books
