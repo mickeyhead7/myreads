@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import sortBy from 'sort-by';
 import SearchPage from './SearchPage';
 import BookList from './BookList';
 import * as BooksAPI from './BooksAPI';
@@ -68,6 +69,7 @@ class BooksApp extends Component {
             book.shelf = shelf;
             books.push(book);
             BooksAPI.update(book, shelf);
+            books.sort(sortBy('title'));
 
             return {
                 books
