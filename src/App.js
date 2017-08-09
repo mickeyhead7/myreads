@@ -16,8 +16,8 @@ class BooksApp extends Component {
     state = {
         books: [],
         searchResults: [],
-        query: ''
-    }
+        query: '',
+    };
 
     /**
      * Retrieves books when the component has mounted
@@ -25,7 +25,7 @@ class BooksApp extends Component {
     componentDidMount () {
         BooksAPI.getAll().then(books => {
             this.setState({
-                books: books
+                books,
             });
         });
     }
@@ -51,10 +51,10 @@ class BooksApp extends Component {
 
             this.setState({
                 searchResults: books || [],
-                query: query
+                query,
             });
         });
-    }
+    };
 
     /**
      * Moves a book to a specified shelf
@@ -72,10 +72,10 @@ class BooksApp extends Component {
             BooksAPI.update(book, shelf);
 
             return {
-                books
+                books,
             };
         });
-    }
+    };
 
     /**
      * Gets the books from a specified shelf
@@ -85,11 +85,11 @@ class BooksApp extends Component {
      */
     getBooksFromShelf = (shelf) => {
         if (!['currentlyReading', 'wantToRead', 'read'].includes(shelf)) {
-            throw new Error(`Invalid shelf: ${shelf}`)
+            throw new Error(`Invalid shelf: ${shelf}`);
         }
 
         return this.state.books.filter(book => book.shelf === shelf);
-    }
+    };
 
     /**
      * Renders the application
@@ -118,8 +118,8 @@ class BooksApp extends Component {
                     />
                 )} />
             </div>
-        )
+        );
     }
 }
 
-export default BooksApp
+export default BooksApp;

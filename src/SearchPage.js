@@ -19,7 +19,7 @@ class SearchPage extends Component {
         }
 
         return this.props.onSearch(query);
-    }
+    };
 
     /**
      * Renders the view

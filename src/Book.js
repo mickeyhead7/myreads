@@ -6,16 +6,15 @@ import nestedProperty from 'nested-property';
  */
 class Book extends Component {
     /**
+     *
      * Formats the authors for output
      *
-     * @param authors {array} Authors
+     * @param authors {Array} Authors
      * @returns {XML} Formatted output
      */
-    formatAuthor = (authors = []) => {
-        return authors.map((author, key) => (
-            <div key={key}>{author}</div>
-        ));
-    }
+    formatAuthor = (authors = []) => authors.map((author, key) => (
+        <div key={key}>{author}</div>
+    ));
 
     /**
      * Handle moving a book to a shelf
@@ -23,11 +22,11 @@ class Book extends Component {
      * @param event Trigger event
      * @returns {*} Result of move method
      */
-    handleMove = (event) => {
+    handleMove = event => {
         const shelf = event.target.options[event.target.selectedIndex].value;
 
         return this.props.onMove(this.props.original, shelf);
-    }
+    };
 
     /**
      * Renders the view
@@ -42,7 +41,10 @@ class Book extends Component {
         return (
             <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: thumbnail }} />
+                    <div
+                        className="book-cover"
+                        style={{ width: 128, height: 193, backgroundImage: thumbnail }}
+                    />
                     <div className="book-shelf-changer">
                         <select value={shelf || 'none'} onChange={this.handleMove}>
                             <option value="none" disabled>Move to...</option>

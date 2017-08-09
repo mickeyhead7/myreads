@@ -1,0 +1,8 @@
+{
+  "preset": "airbnb",
+  "validateIndentation": 4,
+  "excludeFiles": [
+    "src/App.test.js",
+    "src/BooksAPI.js"
+  ]
+}
