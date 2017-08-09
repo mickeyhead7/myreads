@@ -37,7 +37,7 @@ class BooksApp extends Component {
      */
     search = (query) => {
         BooksAPI.search(query).then(results => {
-            results = results.items ? results.items : results;
+            results = results.items || results;
 
             const books = results.map(book => {
                 this.state.books.forEach(b => {

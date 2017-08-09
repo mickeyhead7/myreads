@@ -36,14 +36,14 @@ class Book extends Component {
     render () {
         const { title, authors, shelf, imageLinks } = this.props;
         const thumbnailUrl = nestedProperty.get(imageLinks, 'smallThumbnail') || null;
-        const thumbnail = `url("${thumbnailUrl}")`;
+        const backgroundImage = `url("${thumbnailUrl}")`;
 
         return (
             <div className="book">
                 <div className="book-top">
                     <div
                         className="book-cover"
-                        style={{ width: 128, height: 193, backgroundImage: thumbnail }}
+                        style={{ width: 128, height: 193, backgroundImage }}
                     />
                     <div className="book-shelf-changer">
                         <select value={shelf || 'none'} onChange={this.handleMove}>

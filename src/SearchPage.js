@@ -13,7 +13,9 @@ class SearchPage extends Component {
      * @param query {string} Search query
      * @returns {*} Result of search method
      */
-    search = (query) => {
+    search = (event) => {
+        const query = event.target.value;
+
         if (!this.props.onSearch) {
             throw new Error('onSearch method not defined');
         }
@@ -39,7 +41,7 @@ class SearchPage extends Component {
                             placeholder="Search by title or author"
                             value={query}
                             debounceTimeout={300}
-                            onChange={event => this.search(event.target.value)}
+                            onChange={this.search}
                         />
                     </div>
                 </div>
