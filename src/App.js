@@ -57,6 +57,30 @@ class BooksApp extends Component {
     };
 
     /**
+     * Adds a new book to a given shelf
+     *
+     * @param bookId {string} Book id to move
+     * @param shelf {string} Shelf to move book to
+     */
+    addNew = (bookId, shelf) => {
+        const book = this.state.searchResults.filter(b => b.id === bookId).shift();
+
+        this.move(book, shelf);
+    }
+
+    /**
+     * Moves an existing book to a specified shelf
+     *
+     * @param bookId {string} Book id to move
+     * @param shelf {string} Shelf to move book to
+     */
+    moveExisting = (bookId, shelf) => {
+        const book = this.state.books.filter(b => b.id === bookId).shift();
+
+        this.move(book, shelf);
+    };
+
+    /**
      * Moves a book to a specified shelf
      *
      * @param book {object} Book to move
@@ -75,7 +99,7 @@ class BooksApp extends Component {
                 books,
             };
         });
-    };
+    }
 
     /**
      * Gets the books from a specified shelf
@@ -106,7 +130,7 @@ class BooksApp extends Component {
                         currentlyReading={this.getBooksFromShelf('currentlyReading')}
                         wantToRead={this.getBooksFromShelf('wantToRead')}
                         read={this.getBooksFromShelf('read')}
-                        onMove={this.move}
+                        onMove={this.moveExisting}
                     />
                 )} />
                 <Route exact path="/search" render={() => (
@@ -114,7 +138,7 @@ class BooksApp extends Component {
                         books={searchResults}
                         query={query}
                         onSearch={this.search}
-                        onMove={this.move}
+                        onMove={this.addNew}
                     />
                 )} />
             </div>

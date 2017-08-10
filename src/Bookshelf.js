@@ -22,7 +22,6 @@ class Bookshelf extends Component {
                             <li key={key}>
                                 <Book
                                     {...book}
-                                    original={book}
                                     onMove={onMove}
                                 />
                             </li>

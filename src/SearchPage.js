@@ -51,7 +51,6 @@ class SearchPage extends Component {
                             <li key={book.id}>
                                 <Book
                                     {...book}
-                                    original={book}
                                     onMove={onMove}
                                 />
                             </li>

@@ -25,7 +25,7 @@ class Book extends Component {
     handleMove = event => {
         const shelf = event.target.options[event.target.selectedIndex].value;
 
-        return this.props.onMove(this.props.original, shelf);
+        return this.props.onMove(this.props.id, shelf);
     };
 
     /**
