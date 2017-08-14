@@ -7,7 +7,7 @@ import * as BooksAPI from './BooksAPI';
 import './App.css';
 
 /**
- * Renders the application using routing
+ * @description Renders the application using routing
  */
 class BooksApp extends Component {
     /**
@@ -20,7 +20,7 @@ class BooksApp extends Component {
     };
 
     /**
-     * Retrieves books when the component has mounted
+     * @description Retrieves books when the component has mounted
      */
     componentDidMount () {
         BooksAPI.getAll().then(books => {
@@ -31,8 +31,7 @@ class BooksApp extends Component {
     }
 
     /**
-     * Performs a book search
-     *
+     * @description Performs a book search
      * @param query {string} Search query
      */
     search = (query) => {
@@ -57,8 +56,7 @@ class BooksApp extends Component {
     };
 
     /**
-     * Adds a new book to a given shelf
-     *
+     * @description Adds a new book to a given shelf
      * @param bookId {string} Book id to move
      * @param shelf {string} Shelf to move book to
      */
@@ -66,11 +64,10 @@ class BooksApp extends Component {
         const book = this.state.searchResults.filter(b => b.id === bookId).shift();
 
         this.move(book, shelf);
-    }
+    };
 
     /**
-     * Moves an existing book to a specified shelf
-     *
+     * @description Moves an existing book to a specified shelf
      * @param bookId {string} Book id to move
      * @param shelf {string} Shelf to move book to
      */
@@ -81,12 +78,15 @@ class BooksApp extends Component {
     };
 
     /**
-     * Moves a book to a specified shelf
-     *
+     * @description Moves a book to a specified shelf
      * @param book {object} Book to move
      * @param shelf {string} Shelf to move book to
      */
     move = (book, shelf) => {
+        if (!book) {
+            throw new Error('Book not found');
+        }
+
         this.setState(previous => {
             let books = previous.books.filter(b => b.id !== book.id);
 
@@ -99,11 +99,10 @@ class BooksApp extends Component {
                 books,
             };
         });
-    }
+    };
 
     /**
-     * Gets the books from a specified shelf
-     *
+     * @description Gets the books from a specified shelf
      * @param shelf Shelf identifier
      * @returns {Array.<*>} List of books from a selected shelf
      */
@@ -116,8 +115,7 @@ class BooksApp extends Component {
     };
 
     /**
-     * Renders the application
-     *
+     * @description Renders the application
      * @returns {XML} Application output
      */
     render () {

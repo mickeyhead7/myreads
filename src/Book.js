@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import nestedProperty from 'nested-property';
+import propTypes from 'prop-types';
 
 /**
- * Renders a book
+ * @description Renders a book
  */
 class Book extends Component {
+    static propTypes = {
+        title: propTypes.string.isRequired,
+        authors: propTypes.array,
+        shelf: propTypes.string,
+        imageLinks: propTypes.shape({
+            smallThumbnail: propTypes.string.isRequired,
+        }),
+    };
+
     /**
      *
-     * Formats the authors for output
-     *
+     * @description Formats the authors for output
      * @param authors {Array} Authors
      * @returns {XML} Formatted output
      */
@@ -17,8 +25,7 @@ class Book extends Component {
     ));
 
     /**
-     * Handle moving a book to a shelf
-     *
+     * @description Handle moving a book to a shelf
      * @param event Trigger event
      * @returns {*} Result of move method
      */
@@ -29,13 +36,12 @@ class Book extends Component {
     };
 
     /**
-     * Renders the view
-     *
+     * @description Renders the view
      * @returns {XML} View output
      */
     render () {
         const { title, authors, shelf, imageLinks } = this.props;
-        const thumbnailUrl = nestedProperty.get(imageLinks, 'smallThumbnail') || null;
+        const thumbnailUrl = imageLinks.smallThumbnail;
         const backgroundImage = `url("${thumbnailUrl}")`;
 
         return (

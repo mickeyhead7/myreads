@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import Book from './Book';
 
 /**
- * Renders a bookshelf
+ * @description Renders a bookshelf
  */
 class Bookshelf extends Component {
+    static propTypes = {
+        title: propTypes.string.isRequired,
+        books: propTypes.array.isRequired,
+        onMove: propTypes.func.isRequired,
+    };
+
     /**
-     * Renders the view
-     *
+     * @description Renders the view
      * @returns {XML} View output
      */
     render () {

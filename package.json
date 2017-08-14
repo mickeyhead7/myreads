@@ -1,7 +1,6 @@
 {
   "dependencies": {
-    "nested-property": "^0.0.7",
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-debounce-input": "^3.0.1",
     "react-dom": "^15.5.4",

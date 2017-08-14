@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import Bookshelf from './Bookshelf';
 
 /**
- * Renders a book list view
+ * @description Renders a book list view
  */
 class BookList extends Component {
+    static propTypes = {
+        currentlyReading: propTypes.array.isRequired,
+        wantToRead: propTypes.array.isRequired,
+        read: propTypes.array.isRequired,
+        onMove: propTypes.func.isRequired,
+    };
+
     /**
-     * Renders the view
-     *
+     * @description Renders the view
      * @returns {XML} View output
      */
     render () {

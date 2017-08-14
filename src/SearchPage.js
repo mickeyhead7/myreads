@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import DebounceInput from 'react-debounce-input';
 import Book from './Book';
 
 /**
- * Search page view
+ * @description Search page view
  */
 class SearchPage extends Component {
+    static propTypes = {
+        query: propTypes.string,
+        books: propTypes.array.isRequired,
+        onMove: propTypes.func.isRequired,
+    };
+
     /**
-     * Performs a search
-     *
-     * @param query {string} Search query
+     * @description Performs a search
+     * @param event {object} Search input event
      * @returns {*} Result of search method
      */
     search = (event) => {
@@ -24,8 +30,7 @@ class SearchPage extends Component {
     };
 
     /**
-     * Renders the view
-     *
+     * @description Renders the view
      * @returns {XML} View output
      */
     render () {
